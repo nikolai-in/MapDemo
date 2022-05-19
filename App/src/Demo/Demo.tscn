@@ -1,0 +1,85 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="NavigationPolygon" id=1]
+
+[node name="Demo" type="Node2D"]
+
+[node name="Hall" type="Polygon2D" parent="."]
+color = Color( 1, 0.988235, 0.976471, 1 )
+polygon = PoolVector2Array( 600, 100, 1800, 100, 1800, 800, 600, 800 )
+
+[node name="Room 1" type="Polygon2D" parent="."]
+color = Color( 0.694118, 0.929412, 0.909804, 0.588235 )
+polygon = PoolVector2Array( 600, 100, 600, 400, 1000, 400, 1000, 100 )
+
+[node name="Label" type="Label" parent="Room 1"]
+margin_left = 760.0
+margin_top = 232.0
+margin_right = 800.0
+margin_bottom = 257.0
+text = "1"
+
+[node name="Room 2" type="Polygon2D" parent="."]
+position = Vector2( 0, 400 )
+color = Color( 0.694118, 0.929412, 0.909804, 0.588235 )
+polygon = PoolVector2Array( 600, 100, 600, 400, 1000, 400, 1000, 100 )
+
+[node name="Label2" type="Label" parent="Room 2"]
+margin_left = 776.0
+margin_top = 168.0
+margin_right = 816.0
+margin_bottom = 193.0
+text = "2"
+
+[node name="Room 3" type="Polygon2D" parent="."]
+position = Vector2( 488, 400 )
+color = Color( 0.694118, 0.929412, 0.909804, 0.588235 )
+polygon = PoolVector2Array( 600, 100, 600, 400, 1000, 400, 1000, 100 )
+
+[node name="Label2" type="Label" parent="Room 3"]
+margin_left = 776.0
+margin_top = 168.0
+margin_right = 816.0
+margin_bottom = 193.0
+text = "3"
+
+[node name="Room 4" type="Polygon2D" parent="."]
+position = Vector2( 488, 0 )
+color = Color( 0.694118, 0.929412, 0.909804, 0.588235 )
+polygon = PoolVector2Array( 600, 100, 600, 400, 1000, 400, 1000, 100 )
+
+[node name="Label2" type="Label" parent="Room 4"]
+margin_left = 776.0
+margin_top = 232.0
+margin_right = 816.0
+margin_bottom = 257.0
+text = "4"
+
+[node name="Room 5" type="Polygon2D" parent="."]
+position = Vector2( 952, 0 )
+color = Color( 0.694118, 0.929412, 0.909804, 0.588235 )
+polygon = PoolVector2Array( 600, 100, 600, 400, 850, 400, 850, 100 )
+
+[node name="Label2" type="Label" parent="Room 5"]
+margin_left = 728.0
+margin_top = 232.0
+margin_right = 768.0
+margin_bottom = 257.0
+text = "5"
+
+[node name="Room 6" type="Polygon2D" parent="."]
+position = Vector2( 952, 400 )
+color = Color( 0.694118, 0.929412, 0.909804, 0.588235 )
+polygon = PoolVector2Array( 600, 100, 600, 400, 850, 400, 850, 100 )
+
+[node name="Label2" type="Label" parent="Room 6"]
+margin_left = 728.0
+margin_top = 168.0
+margin_right = 768.0
+margin_bottom = 193.0
+text = "6"
+
+[node name="Navigation2D" type="Navigation2D" parent="."]
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation2D"]
+navpoly = SubResource( 1 )
