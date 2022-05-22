@@ -1,9 +1,16 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/PanningCamera2D/PanningCamera2D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Grid/Grid.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/UI/UI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Demo/Demo.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/Main/Editor.gd" type="Script" id=5]
+[ext_resource path="res://src/Main/StateMachine/StateMachine.gd" type="Script" id=6]
+[ext_resource path="res://src/Main/StateMachine/Viewer.gd" type="Script" id=7]
+[ext_resource path="res://src/Main/DrawerRect.gd" type="Script" id=8]
+[ext_resource path="res://src/Main/Selection.gd" type="Script" id=9]
+[ext_resource path="res://src/Main/DrawerLine.gd" type="Script" id=10]
+[ext_resource path="res://src/Main/DrawerPoint.gd" type="Script" id=11]
 
 [node name="Main" type="Node2D"]
 
@@ -16,3 +23,97 @@ position = Vector2( -870, -470 )
 [node name="PanningCamera2D" parent="." instance=ExtResource( 1 )]
 
 [node name="UI" parent="." instance=ExtResource( 3 )]
+
+[node name="Panel" parent="UI/Sidebar/Column/Search" index="0"]
+margin_bottom = 227.0
+
+[node name="Margin" parent="UI/Sidebar/Column/Search" index="1"]
+margin_bottom = 227.0
+
+[node name="Column" parent="UI/Sidebar/Column/Search/Margin" index="0"]
+margin_bottom = 211.0
+
+[node name="From" parent="UI/Sidebar/Column/Search/Margin/Column" index="2"]
+margin_bottom = 107.434
+
+[node name="To" parent="UI/Sidebar/Column/Search/Margin/Column" index="3"]
+margin_top = 115.0
+margin_bottom = 155.434
+
+[node name="Button" parent="UI/Sidebar/Column/Search/Margin/Column" index="4"]
+margin_top = 163.0
+margin_bottom = 203.251
+
+[node name="Layers" parent="UI/Sidebar/Column/Editor/Margin/Column" index="4"]
+margin_bottom = 367.0
+
+[node name="Sep3" parent="UI/Sidebar/Column/Editor/Margin/Column" index="5"]
+margin_top = 375.0
+margin_bottom = 383.0
+
+[node name="Bools" parent="UI/Sidebar/Column/Editor/Margin/Column" index="6"]
+margin_top = 391.0
+margin_bottom = 445.0
+
+[node name="Sep4" parent="UI/Sidebar/Column/Editor/Margin/Column" index="7"]
+margin_top = 453.0
+margin_bottom = 461.0
+
+[node name="ColorPickerButton" parent="UI/Sidebar/Column/Editor/Margin/Column" index="8"]
+margin_top = 469.0
+margin_bottom = 512.251
+
+[node name="DebugPanel" parent="UI/Sidebar/Column" index="2"]
+margin_left = 0.0
+margin_bottom = 937.64
+
+[node name="DebugPanel" parent="UI/Sidebar/Column/DebugPanel" index="0"]
+margin_right = 252.0
+reference_path = NodePath("../../../../../StateMachine")
+properties = PoolStringArray( "_state_name" )
+
+[node name="VBoxContainer" parent="UI/Sidebar/Column/DebugPanel/DebugPanel" index="0"]
+margin_right = 230.653
+
+[node name="ReferenceName" parent="UI/Sidebar/Column/DebugPanel/DebugPanel/VBoxContainer" index="0"]
+margin_right = 218.0
+
+[node name="MarginContainer" parent="UI/Sidebar/Column/DebugPanel/DebugPanel/VBoxContainer" index="1"]
+margin_right = 218.0
+
+[node name="VBoxContainer" parent="UI/Sidebar/Column/DebugPanel/DebugPanel/VBoxContainer/MarginContainer" index="0"]
+margin_right = 198.0
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 6 )
+initial_state = NodePath("Viewer")
+
+[node name="Viewer" type="Node" parent="StateMachine"]
+script = ExtResource( 7 )
+tools_path = NodePath("../../UI/Sidebar/Column/Editor/Margin/Column/Tools")
+
+[node name="Editor" type="Node" parent="StateMachine"]
+script = ExtResource( 5 )
+
+[node name="DrawerRect" type="Node" parent="StateMachine/Editor"]
+script = ExtResource( 8 )
+
+[node name="DrawerLine" type="Node" parent="StateMachine/Editor"]
+script = ExtResource( 10 )
+
+[node name="DrawerPoint" type="Node" parent="StateMachine/Editor"]
+script = ExtResource( 11 )
+
+[node name="Selection" type="Node" parent="StateMachine"]
+script = ExtResource( 9 )
+
+[connection signal="toggled" from="UI/Sidebar/Column/Editor/Margin/Column/Tools/AddRect" to="StateMachine/Viewer" method="_on_AddRect_toggled"]
+[connection signal="toggled" from="UI/Sidebar/Column/Editor/Margin/Column/Tools/AddLine" to="StateMachine/Viewer" method="_on_AddLine_toggled"]
+[connection signal="toggled" from="UI/Sidebar/Column/Editor/Margin/Column/Tools/AddPoint" to="StateMachine/Viewer" method="_on_AddPoint_toggled"]
+
+[editable path="UI"]
+[editable path="UI/Sidebar"]
+[editable path="UI/Sidebar/Column/Search"]
+[editable path="UI/Sidebar/Column/Editor"]
+[editable path="UI/Sidebar/Column/Editor/Margin/Column/Tools"]
+[editable path="UI/Sidebar/Column/DebugPanel"]

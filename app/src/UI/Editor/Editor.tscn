@@ -1,11 +1,8 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/theme/font_big.tres" type="DynamicFont" id=1]
-[ext_resource path="res://assets/icons/add_line.svg" type="Texture" id=2]
-[ext_resource path="res://assets/icons/add_point.svg" type="Texture" id=3]
-[ext_resource path="res://assets/icons/del.svg" type="Texture" id=4]
+[ext_resource path="res://src/UI/Editor/Tools/Tools.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/icons/exclude.svg" type="Texture" id=5]
-[ext_resource path="res://assets/icons/add_rect.svg" type="Texture" id=6]
 [ext_resource path="res://assets/icons/unite.svg" type="Texture" id=7]
 [ext_resource path="res://assets/icons/intersect.svg" type="Texture" id=8]
 [ext_resource path="res://assets/icons/subtract.svg" type="Texture" id=9]
@@ -48,40 +45,7 @@ margin_top = 51.0
 margin_right = 228.0
 margin_bottom = 59.0
 
-[node name="Tools" type="HBoxContainer" parent="Margin/Column"]
-margin_top = 67.0
-margin_right = 228.0
-margin_bottom = 116.0
-
-[node name="AddRect" type="Button" parent="Margin/Column/Tools"]
-margin_right = 51.3241
-margin_bottom = 49.251
-size_flags_horizontal = 3
-toggle_mode = true
-icon = ExtResource( 6 )
-
-[node name="AddLine" type="Button" parent="Margin/Column/Tools"]
-margin_left = 59.0
-margin_right = 110.324
-margin_bottom = 49.251
-size_flags_horizontal = 3
-toggle_mode = true
-icon = ExtResource( 2 )
-
-[node name="AddPoint" type="Button" parent="Margin/Column/Tools"]
-margin_left = 118.0
-margin_right = 169.324
-margin_bottom = 49.251
-size_flags_horizontal = 3
-toggle_mode = true
-icon = ExtResource( 3 )
-
-[node name="Del" type="Button" parent="Margin/Column/Tools"]
-margin_left = 177.0
-margin_right = 228.0
-margin_bottom = 49.251
-size_flags_horizontal = 3
-icon = ExtResource( 4 )
+[node name="Tools" parent="Margin/Column" instance=ExtResource( 2 )]
 
 [node name="Sep2" type="HSeparator" parent="Margin/Column"]
 margin_top = 124.0
@@ -136,3 +100,4 @@ margin_bottom = 467.0
 margin_top = 475.0
 margin_right = 228.0
 margin_bottom = 512.0
+color = Color( 0.172549, 0.164706, 0.196078, 1 )
