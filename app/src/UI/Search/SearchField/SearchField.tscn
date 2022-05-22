@@ -1,0 +1,9 @@
+[gd_scene format=2]
+
+[node name="From" type="LineEdit"]
+margin_top = 67.0
+margin_right = 228.0
+margin_bottom = 113.434
+align = 1
+placeholder_text = "Аудитория A"
+caret_blink = true

@@ -1,0 +1,61 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/theme/font_big.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/theme/Font Awesome 6 Free-Solid-900.otf" type="DynamicFontData" id=2]
+[ext_resource path="res://src/UI/Search/SearchField/SearchField.tscn" type="PackedScene" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 2 )
+
+[node name="Search" type="MarginContainer"]
+margin_right = 260.0
+margin_bottom = 235.0
+rect_min_size = Vector2( 200, 0 )
+
+[node name="Panel" type="Panel" parent="."]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 252.0
+margin_bottom = 239.0
+
+[node name="Margin" type="MarginContainer" parent="."]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 252.0
+margin_bottom = 239.0
+
+[node name="Column" type="VBoxContainer" parent="Margin"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 236.0
+margin_bottom = 223.0
+
+[node name="Name" type="Label" parent="Margin/Column"]
+margin_right = 228.0
+margin_bottom = 43.0
+custom_fonts/font = ExtResource( 1 )
+text = "Поиск"
+align = 1
+valign = 1
+
+[node name="Sep" type="HSeparator" parent="Margin/Column"]
+margin_top = 51.0
+margin_right = 228.0
+margin_bottom = 59.0
+
+[node name="From" parent="Margin/Column" instance=ExtResource( 3 )]
+
+[node name="To" parent="Margin/Column" instance=ExtResource( 3 )]
+margin_top = 121.0
+margin_bottom = 167.434
+placeholder_text = "Аудитория B"
+
+[node name="Button" type="Button" parent="Margin/Column"]
+margin_top = 175.0
+margin_right = 228.0
+margin_bottom = 215.251
+custom_fonts/font = SubResource( 1 )
+text = ""
+expand_icon = true
