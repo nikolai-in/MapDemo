@@ -293,7 +293,6 @@ script = ExtResource( 5 )
 
 [node name="DrawerRect" type="Node" parent="StateMachine/Editor"]
 script = ExtResource( 8 )
-StateOptions = NodePath("../../../UI/Sidebar/ScrollContainer/Column/StateOptions")
 
 [node name="DrawerLine" type="Node" parent="StateMachine/Editor"]
 script = ExtResource( 10 )
