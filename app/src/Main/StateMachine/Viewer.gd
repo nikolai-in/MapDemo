@@ -5,6 +5,9 @@ export var tools_path : NodePath
 onready var AddRect : Button = get_node(str(tools_path) + "/AddRect")
 onready var AddLine : Button = get_node(str(tools_path) + "/AddLine")
 onready var AddPoint : Button = get_node(str(tools_path) + "/AddPoint")
+onready var Del : Button = get_node(str(tools_path) + "/Del")
+
+onready var buttons: = [AddRect, AddLine, AddPoint, Del]
 
 onready var PanningCamera: PanningCamera2D = owner.get_node("PanningCamera2D")
 
@@ -20,7 +23,9 @@ func physics_process(delta: float) -> void:
 
 
 func enter(msg: Dictionary = {}) -> void:
-	pass
+	# А это тут нужно?
+	for btn in buttons:
+		btn.pressed = false
 
 
 func exit() -> void:

@@ -16,19 +16,80 @@ margin_top = 8.0
 margin_right = 268.0
 margin_bottom = 1072.0
 
-[node name="Column" type="VBoxContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 268.0
 margin_bottom = 1072.0
+scroll_horizontal_enabled = false
 
-[node name="Search" parent="Column" instance=ExtResource( 2 )]
+[node name="Column" type="VBoxContainer" parent="ScrollContainer"]
+margin_right = 260.0
+margin_bottom = 921.0
 
-[node name="Editor" parent="Column" instance=ExtResource( 3 )]
+[node name="Search" parent="ScrollContainer/Column" instance=ExtResource( 2 )]
+
+[node name="Panel" parent="ScrollContainer/Column/Search" index="0"]
+margin_bottom = 227.0
+
+[node name="Margin" parent="ScrollContainer/Column/Search" index="1"]
+margin_bottom = 227.0
+
+[node name="Column" parent="ScrollContainer/Column/Search/Margin" index="0"]
+margin_bottom = 211.0
+
+[node name="From" parent="ScrollContainer/Column/Search/Margin/Column" index="2"]
+margin_bottom = 107.434
+
+[node name="To" parent="ScrollContainer/Column/Search/Margin/Column" index="3"]
+margin_top = 115.0
+margin_bottom = 155.434
+
+[node name="Button" parent="ScrollContainer/Column/Search/Margin/Column" index="4"]
+margin_top = 163.0
+margin_bottom = 203.251
+
+[node name="Editor" parent="ScrollContainer/Column" instance=ExtResource( 3 )]
 margin_bottom = 787.0
 
-[node name="DebugPanel" parent="Column" instance=ExtResource( 4 )]
+[node name="Layers" parent="ScrollContainer/Column/Editor/Margin/Column" index="4"]
+margin_bottom = 367.0
+
+[node name="Sep3" parent="ScrollContainer/Column/Editor/Margin/Column" index="5"]
+margin_top = 375.0
+margin_bottom = 383.0
+
+[node name="Bools" parent="ScrollContainer/Column/Editor/Margin/Column" index="6"]
+margin_top = 391.0
+margin_bottom = 445.0
+
+[node name="Sep4" parent="ScrollContainer/Column/Editor/Margin/Column" index="7"]
+margin_top = 453.0
+margin_bottom = 461.0
+
+[node name="ColorPickerButton" parent="ScrollContainer/Column/Editor/Margin/Column" index="8"]
+margin_top = 469.0
+margin_bottom = 512.251
+
+[node name="DebugPanel" parent="ScrollContainer/Column" instance=ExtResource( 4 )]
 margin_left = 0.0
 margin_top = 795.0
 margin_right = 260.0
-margin_bottom = 937.64
+margin_bottom = 921.64
+
+[node name="VBoxContainer" parent="ScrollContainer/Column/DebugPanel" index="0"]
+margin_right = 246.653
+
+[node name="ReferenceName" parent="ScrollContainer/Column/DebugPanel/VBoxContainer" index="0"]
+margin_right = 234.0
+
+[node name="MarginContainer" parent="ScrollContainer/Column/DebugPanel/VBoxContainer" index="1"]
+margin_right = 234.0
+
+[node name="VBoxContainer" parent="ScrollContainer/Column/DebugPanel/VBoxContainer/MarginContainer" index="0"]
+margin_right = 214.0
+
+[editable path="ScrollContainer/Column/Search"]
+[editable path="ScrollContainer/Column/Editor"]
+[editable path="ScrollContainer/Column/Editor/Margin/Column/Tools"]
+[editable path="ScrollContainer/Column/DebugPanel"]

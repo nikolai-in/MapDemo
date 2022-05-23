@@ -5,3 +5,5 @@
 [node name="UI" type="CanvasLayer"]
 
 [node name="Sidebar" parent="." instance=ExtResource( 1 )]
+
+[editable path="Sidebar"]

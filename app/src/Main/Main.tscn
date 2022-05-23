@@ -1,9 +1,9 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://src/PanningCamera2D/PanningCamera2D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Grid/Grid.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/UI/UI.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/Demo/Demo.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/theme/kenneyUI.tres" type="Theme" id=3]
+[ext_resource path="res://assets/theme/Font Awesome 6 Free-Solid-900.otf" type="DynamicFontData" id=4]
 [ext_resource path="res://src/Main/Editor.gd" type="Script" id=5]
 [ext_resource path="res://src/Main/StateMachine/StateMachine.gd" type="Script" id=6]
 [ext_resource path="res://src/Main/StateMachine/Viewer.gd" type="Script" id=7]
@@ -11,82 +11,274 @@
 [ext_resource path="res://src/Main/Selection.gd" type="Script" id=9]
 [ext_resource path="res://src/Main/DrawerLine.gd" type="Script" id=10]
 [ext_resource path="res://src/Main/DrawerPoint.gd" type="Script" id=11]
+[ext_resource path="res://assets/icons/add_line.svg" type="Texture" id=12]
+[ext_resource path="res://assets/icons/add_rect.svg" type="Texture" id=13]
+[ext_resource path="res://src/UI/Editor/Tools/AddPoint.gd" type="Script" id=14]
+[ext_resource path="res://assets/theme/font_big.tres" type="DynamicFont" id=15]
+[ext_resource path="res://assets/icons/exclude.svg" type="Texture" id=16]
+[ext_resource path="res://assets/icons/subtract.svg" type="Texture" id=17]
+[ext_resource path="res://assets/icons/intersect.svg" type="Texture" id=18]
+[ext_resource path="res://assets/icons/unite.svg" type="Texture" id=19]
+[ext_resource path="res://assets/icons/add_point.svg" type="Texture" id=20]
+[ext_resource path="res://src/UI/Editor/Tools/AddLine.gd" type="Script" id=21]
+[ext_resource path="res://src/UI/Editor/Tools/AddRect.gd" type="Script" id=22]
+[ext_resource path="res://src/UI/Editor/Layers/Layers.tscn" type="PackedScene" id=23]
+[ext_resource path="res://src/UI/Search/SearchField/SearchField.tscn" type="PackedScene" id=24]
+[ext_resource path="res://src/UI/debug/DebugPanel.tscn" type="PackedScene" id=25]
+[ext_resource path="res://assets/icons/del.svg" type="Texture" id=26]
+
+[sub_resource type="DynamicFont" id=1]
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 4 )
 
 [node name="Main" type="Node2D"]
 
 [node name="Grid" parent="." instance=ExtResource( 2 )]
 z_index = -1
 
-[node name="Demo" parent="." instance=ExtResource( 4 )]
-position = Vector2( -870, -470 )
+[node name="MapCanvas" type="Node2D" parent="."]
 
 [node name="PanningCamera2D" parent="." instance=ExtResource( 1 )]
 
-[node name="UI" parent="." instance=ExtResource( 3 )]
+[node name="UI" type="CanvasLayer" parent="."]
 
-[node name="Panel" parent="UI/Sidebar/Column/Search" index="0"]
+[node name="Sidebar" type="MarginContainer" parent="UI"]
+anchor_bottom = 1.0
+rect_min_size = Vector2( 220, 0 )
+theme = ExtResource( 3 )
+
+[node name="Panel" type="Panel" parent="UI/Sidebar"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 268.0
+margin_bottom = 1072.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/Sidebar"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 268.0
+margin_bottom = 1072.0
+scroll_horizontal_enabled = false
+
+[node name="Column" type="VBoxContainer" parent="UI/Sidebar/ScrollContainer"]
+margin_right = 260.0
+margin_bottom = 980.0
+
+[node name="Search" type="MarginContainer" parent="UI/Sidebar/ScrollContainer/Column"]
+margin_right = 260.0
+margin_bottom = 235.0
+rect_min_size = Vector2( 200, 0 )
+
+[node name="Panel" type="Panel" parent="UI/Sidebar/ScrollContainer/Column/Search"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 252.0
 margin_bottom = 227.0
 
-[node name="Margin" parent="UI/Sidebar/Column/Search" index="1"]
+[node name="Margin" type="MarginContainer" parent="UI/Sidebar/ScrollContainer/Column/Search"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 252.0
 margin_bottom = 227.0
 
-[node name="Column" parent="UI/Sidebar/Column/Search/Margin" index="0"]
+[node name="Column" type="VBoxContainer" parent="UI/Sidebar/ScrollContainer/Column/Search/Margin"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 236.0
 margin_bottom = 211.0
 
-[node name="From" parent="UI/Sidebar/Column/Search/Margin/Column" index="2"]
+[node name="Name" type="Label" parent="UI/Sidebar/ScrollContainer/Column/Search/Margin/Column"]
+margin_right = 228.0
+margin_bottom = 43.0
+custom_fonts/font = ExtResource( 15 )
+text = "Поиск"
+align = 1
+valign = 1
+
+[node name="Sep" type="HSeparator" parent="UI/Sidebar/ScrollContainer/Column/Search/Margin/Column"]
+margin_top = 51.0
+margin_right = 228.0
+margin_bottom = 59.0
+
+[node name="From" parent="UI/Sidebar/ScrollContainer/Column/Search/Margin/Column" instance=ExtResource( 24 )]
 margin_bottom = 107.434
 
-[node name="To" parent="UI/Sidebar/Column/Search/Margin/Column" index="3"]
+[node name="To" parent="UI/Sidebar/ScrollContainer/Column/Search/Margin/Column" instance=ExtResource( 24 )]
 margin_top = 115.0
 margin_bottom = 155.434
+placeholder_text = "Аудитория B"
 
-[node name="Button" parent="UI/Sidebar/Column/Search/Margin/Column" index="4"]
+[node name="Button" type="Button" parent="UI/Sidebar/ScrollContainer/Column/Search/Margin/Column"]
 margin_top = 163.0
+margin_right = 228.0
 margin_bottom = 203.251
+custom_fonts/font = SubResource( 1 )
+text = ""
+expand_icon = true
 
-[node name="Layers" parent="UI/Sidebar/Column/Editor/Margin/Column" index="4"]
+[node name="Editor" type="MarginContainer" parent="UI/Sidebar/ScrollContainer/Column"]
+margin_top = 243.0
+margin_right = 260.0
+margin_bottom = 787.0
+rect_min_size = Vector2( 200, 0 )
+
+[node name="Panel" type="Panel" parent="UI/Sidebar/ScrollContainer/Column/Editor"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 252.0
+margin_bottom = 536.0
+
+[node name="Margin" type="MarginContainer" parent="UI/Sidebar/ScrollContainer/Column/Editor"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 252.0
+margin_bottom = 536.0
+
+[node name="Column" type="VBoxContainer" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 236.0
+margin_bottom = 520.0
+
+[node name="Name" type="Label" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column"]
+margin_right = 228.0
+margin_bottom = 43.0
+custom_fonts/font = ExtResource( 15 )
+text = "Редактор"
+align = 1
+valign = 1
+
+[node name="Sep" type="HSeparator" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column"]
+margin_top = 51.0
+margin_right = 228.0
+margin_bottom = 59.0
+
+[node name="Tools" type="HBoxContainer" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column"]
+margin_top = 67.0
+margin_right = 228.0
+margin_bottom = 116.0
+
+[node name="AddRect" type="Button" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools"]
+margin_right = 51.3241
+margin_bottom = 49.251
+size_flags_horizontal = 3
+toggle_mode = true
+icon = ExtResource( 13 )
+script = ExtResource( 22 )
+
+[node name="AddLine" type="Button" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools"]
+margin_left = 59.0
+margin_right = 110.324
+margin_bottom = 49.251
+size_flags_horizontal = 3
+toggle_mode = true
+icon = ExtResource( 12 )
+script = ExtResource( 21 )
+
+[node name="AddPoint" type="Button" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools"]
+margin_left = 118.0
+margin_right = 169.324
+margin_bottom = 49.251
+size_flags_horizontal = 3
+toggle_mode = true
+icon = ExtResource( 20 )
+script = ExtResource( 14 )
+
+[node name="Del" type="Button" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools"]
+margin_left = 177.0
+margin_right = 228.0
+margin_bottom = 49.251
+size_flags_horizontal = 3
+icon = ExtResource( 26 )
+
+[node name="Sep2" type="HSeparator" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column"]
+margin_top = 124.0
+margin_right = 228.0
+margin_bottom = 132.0
+
+[node name="Layers" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column" instance=ExtResource( 23 )]
 margin_bottom = 367.0
 
-[node name="Sep3" parent="UI/Sidebar/Column/Editor/Margin/Column" index="5"]
+[node name="Sep3" type="HSeparator" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column"]
 margin_top = 375.0
+margin_right = 228.0
 margin_bottom = 383.0
 
-[node name="Bools" parent="UI/Sidebar/Column/Editor/Margin/Column" index="6"]
+[node name="Bools" type="HBoxContainer" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column"]
 margin_top = 391.0
+margin_right = 228.0
 margin_bottom = 445.0
 
-[node name="Sep4" parent="UI/Sidebar/Column/Editor/Margin/Column" index="7"]
+[node name="Unite" type="Button" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Bools"]
+margin_right = 51.3241
+margin_bottom = 54.251
+size_flags_horizontal = 3
+icon = ExtResource( 19 )
+
+[node name="Subtract" type="Button" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Bools"]
+margin_left = 59.0
+margin_right = 110.324
+margin_bottom = 54.251
+size_flags_horizontal = 3
+icon = ExtResource( 17 )
+
+[node name="Intersect" type="Button" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Bools"]
+margin_left = 118.0
+margin_right = 169.324
+margin_bottom = 54.251
+size_flags_horizontal = 3
+icon = ExtResource( 18 )
+
+[node name="Exclude" type="Button" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Bools"]
+margin_left = 177.0
+margin_right = 228.324
+margin_bottom = 54.251
+size_flags_horizontal = 3
+icon = ExtResource( 16 )
+
+[node name="Sep4" type="HSeparator" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column"]
 margin_top = 453.0
+margin_right = 228.0
 margin_bottom = 461.0
 
-[node name="ColorPickerButton" parent="UI/Sidebar/Column/Editor/Margin/Column" index="8"]
+[node name="ColorPickerButton" type="ColorPickerButton" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column"]
 margin_top = 469.0
+margin_right = 228.0
 margin_bottom = 512.251
+color = Color( 0.172549, 0.164706, 0.196078, 1 )
 
-[node name="DebugPanel" parent="UI/Sidebar/Column" index="2"]
+[node name="Margin" type="MarginContainer" parent="UI/Sidebar/ScrollContainer/Column"]
+margin_top = 795.0
+margin_right = 260.0
 margin_bottom = 956.64
 
-[node name="DebugPanel" parent="UI/Sidebar/Column/DebugPanel" index="0"]
+[node name="DebugPanel" parent="UI/Sidebar/ScrollContainer/Column/Margin" instance=ExtResource( 25 )]
 margin_right = 252.0
 margin_bottom = 153.64
-reference_path = NodePath("../../../../../StateMachine")
+reference_path = NodePath("../../../../../../StateMachine")
 properties = PoolStringArray( "_state_name" )
 
-[node name="VBoxContainer" parent="UI/Sidebar/Column/DebugPanel/DebugPanel" index="0"]
+[node name="VBoxContainer" parent="UI/Sidebar/ScrollContainer/Column/Margin/DebugPanel" index="0"]
 margin_right = 230.653
 margin_bottom = 134.347
 
-[node name="ReferenceName" parent="UI/Sidebar/Column/DebugPanel/DebugPanel/VBoxContainer" index="0"]
+[node name="ReferenceName" parent="UI/Sidebar/ScrollContainer/Column/Margin/DebugPanel/VBoxContainer" index="0"]
 margin_right = 218.0
 text = "StateMachine"
 
-[node name="MarginContainer" parent="UI/Sidebar/Column/DebugPanel/DebugPanel/VBoxContainer" index="1"]
+[node name="MarginContainer" parent="UI/Sidebar/ScrollContainer/Column/Margin/DebugPanel/VBoxContainer" index="1"]
 margin_right = 218.0
 margin_bottom = 121.0
 
-[node name="VBoxContainer" parent="UI/Sidebar/Column/DebugPanel/DebugPanel/VBoxContainer/MarginContainer" index="0"]
+[node name="VBoxContainer" parent="UI/Sidebar/ScrollContainer/Column/Margin/DebugPanel/VBoxContainer/MarginContainer" index="0"]
 margin_right = 198.0
 margin_bottom = 39.0
+
+[node name="StateOptions" type="MarginContainer" parent="UI/Sidebar/ScrollContainer/Column"]
+margin_top = 964.0
+margin_right = 260.0
+margin_bottom = 980.0
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 6 )
@@ -94,13 +286,14 @@ initial_state = NodePath("Viewer")
 
 [node name="Viewer" type="Node" parent="StateMachine"]
 script = ExtResource( 7 )
-tools_path = NodePath("../../UI/Sidebar/Column/Editor/Margin/Column/Tools")
+tools_path = NodePath("../../UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools")
 
 [node name="Editor" type="Node" parent="StateMachine"]
 script = ExtResource( 5 )
 
 [node name="DrawerRect" type="Node" parent="StateMachine/Editor"]
 script = ExtResource( 8 )
+StateOptions = NodePath("../../../UI/Sidebar/ScrollContainer/Column/StateOptions")
 
 [node name="DrawerLine" type="Node" parent="StateMachine/Editor"]
 script = ExtResource( 10 )
@@ -111,13 +304,14 @@ script = ExtResource( 11 )
 [node name="Selection" type="Node" parent="StateMachine"]
 script = ExtResource( 9 )
 
-[connection signal="toggled" from="UI/Sidebar/Column/Editor/Margin/Column/Tools/AddRect" to="StateMachine/Viewer" method="_on_AddRect_toggled"]
-[connection signal="toggled" from="UI/Sidebar/Column/Editor/Margin/Column/Tools/AddLine" to="StateMachine/Viewer" method="_on_AddLine_toggled"]
-[connection signal="toggled" from="UI/Sidebar/Column/Editor/Margin/Column/Tools/AddPoint" to="StateMachine/Viewer" method="_on_AddPoint_toggled"]
+[connection signal="toggled" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools/AddRect" to="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools/AddLine" method="_on_tool_toggled"]
+[connection signal="toggled" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools/AddRect" to="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools/AddPoint" method="_on_tool_toggled"]
+[connection signal="toggled" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools/AddRect" to="StateMachine/Viewer" method="_on_AddRect_toggled"]
+[connection signal="toggled" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools/AddLine" to="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools/AddRect" method="_on_tool_toggled"]
+[connection signal="toggled" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools/AddLine" to="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools/AddPoint" method="_on_tool_toggled"]
+[connection signal="toggled" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools/AddLine" to="StateMachine/Viewer" method="_on_AddLine_toggled"]
+[connection signal="toggled" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools/AddPoint" to="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools/AddRect" method="_on_tool_toggled"]
+[connection signal="toggled" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools/AddPoint" to="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools/AddLine" method="_on_tool_toggled"]
+[connection signal="toggled" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools/AddPoint" to="StateMachine/Viewer" method="_on_AddPoint_toggled"]
 
-[editable path="UI"]
-[editable path="UI/Sidebar"]
-[editable path="UI/Sidebar/Column/Search"]
-[editable path="UI/Sidebar/Column/Editor"]
-[editable path="UI/Sidebar/Column/Editor/Margin/Column/Tools"]
-[editable path="UI/Sidebar/Column/DebugPanel"]
+[editable path="UI/Sidebar/ScrollContainer/Column/Margin/DebugPanel"]
