@@ -6,9 +6,13 @@ onready var AddRect : Button = get_node(str(tools_path) + "/AddRect")
 onready var AddLine : Button = get_node(str(tools_path) + "/AddLine")
 onready var AddPoint : Button = get_node(str(tools_path) + "/AddPoint")
 
+onready var PanningCamera: PanningCamera2D = owner.get_node("PanningCamera2D")
+
 
 func unhandled_input(event: InputEvent) -> void:
-	pass
+	if event is InputEventMouseMotion:
+		if event.button_mask == BUTTON_MASK_LEFT:
+			PanningCamera.position -= event.relative * PanningCamera.zoom
 
 
 func physics_process(delta: float) -> void:

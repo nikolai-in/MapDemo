@@ -64,25 +64,29 @@ margin_top = 469.0
 margin_bottom = 512.251
 
 [node name="DebugPanel" parent="UI/Sidebar/Column" index="2"]
-margin_left = 0.0
-margin_bottom = 937.64
+margin_bottom = 956.64
 
 [node name="DebugPanel" parent="UI/Sidebar/Column/DebugPanel" index="0"]
 margin_right = 252.0
+margin_bottom = 153.64
 reference_path = NodePath("../../../../../StateMachine")
 properties = PoolStringArray( "_state_name" )
 
 [node name="VBoxContainer" parent="UI/Sidebar/Column/DebugPanel/DebugPanel" index="0"]
 margin_right = 230.653
+margin_bottom = 134.347
 
 [node name="ReferenceName" parent="UI/Sidebar/Column/DebugPanel/DebugPanel/VBoxContainer" index="0"]
 margin_right = 218.0
+text = "StateMachine"
 
 [node name="MarginContainer" parent="UI/Sidebar/Column/DebugPanel/DebugPanel/VBoxContainer" index="1"]
 margin_right = 218.0
+margin_bottom = 121.0
 
 [node name="VBoxContainer" parent="UI/Sidebar/Column/DebugPanel/DebugPanel/VBoxContainer/MarginContainer" index="0"]
 margin_right = 198.0
+margin_bottom = 39.0
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 6 )
