@@ -7,3 +7,7 @@
 [node name="Sidebar" parent="." instance=ExtResource( 1 )]
 
 [editable path="Sidebar"]
+[editable path="Sidebar/ScrollContainer/Column/Search"]
+[editable path="Sidebar/ScrollContainer/Column/Editor"]
+[editable path="Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools"]
+[editable path="Sidebar/ScrollContainer/Column/DebugPanel"]

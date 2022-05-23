@@ -181,6 +181,7 @@ margin_left = 118.0
 margin_right = 169.324
 margin_bottom = 49.251
 size_flags_horizontal = 3
+disabled = true
 toggle_mode = true
 icon = ExtResource( 20 )
 script = ExtResource( 14 )
