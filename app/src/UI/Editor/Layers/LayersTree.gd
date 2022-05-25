@@ -21,14 +21,3 @@ func update() -> void:
 			var item: = create_item(root)
 			item.set_text(0, element.name)
 			item.set_metadata(0, element)
-
-
-func _on_Tree_item_selected() -> void:
-	if selected && selected.get_metadata(0) is Polygon2D:
-		selected.get_metadata(0).color = origin_color
-	selected = get_selected()
-	print_debug(selected)
-	var origin = selected.get_metadata(0)
-	if origin is Polygon2D:
-		origin_color = origin.color
-		origin.color = Color.red
