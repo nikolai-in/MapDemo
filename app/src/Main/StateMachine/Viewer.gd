@@ -26,6 +26,10 @@ func enter(msg: Dictionary = {}) -> void:
 	for btn in buttons:
 		btn.pressed = false
 	get_node("../../UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Layers/Tree").update()
+	var sel: = get_node("../Selection")
+	for item in sel.selection:
+		item.self_modulate = Color( 1, 1, 1, 1 )
+	sel.selection.clear()
 
 
 func exit() -> void:

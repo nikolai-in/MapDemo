@@ -230,6 +230,7 @@ margin_bottom = 445.0
 margin_right = 51.3241
 margin_bottom = 54.251
 size_flags_horizontal = 3
+disabled = true
 icon = ExtResource( 19 )
 
 [node name="Subtract" type="Button" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Bools"]
@@ -237,6 +238,7 @@ margin_left = 59.0
 margin_right = 110.324
 margin_bottom = 54.251
 size_flags_horizontal = 3
+disabled = true
 icon = ExtResource( 17 )
 
 [node name="Intersect" type="Button" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Bools"]
@@ -244,6 +246,7 @@ margin_left = 118.0
 margin_right = 169.324
 margin_bottom = 54.251
 size_flags_horizontal = 3
+disabled = true
 icon = ExtResource( 18 )
 
 [node name="Exclude" type="Button" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Bools"]
@@ -251,6 +254,7 @@ margin_left = 177.0
 margin_right = 228.324
 margin_bottom = 54.251
 size_flags_horizontal = 3
+disabled = true
 icon = ExtResource( 16 )
 
 [node name="Sep4" type="HSeparator" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column"]
@@ -330,5 +334,9 @@ script = ExtResource( 9 )
 [connection signal="toggled" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools/AddPoint" to="StateMachine/Viewer" method="_on_AddPoint_toggled"]
 [connection signal="item_selected" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Layers/Tree" to="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Layers/Tree" method="_on_Tree_item_selected"]
 [connection signal="multi_selected" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Layers/Tree" to="StateMachine/Selection" method="_on_Tree_multi_selected"]
+[connection signal="pressed" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Bools/Unite" to="StateMachine/Selection" method="_on_Unite_pressed"]
+[connection signal="pressed" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Bools/Subtract" to="StateMachine/Selection" method="_on_Subtract_pressed"]
+[connection signal="pressed" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Bools/Intersect" to="StateMachine/Selection" method="_on_Intersect_pressed"]
+[connection signal="pressed" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Bools/Exclude" to="StateMachine/Selection" method="_on_Exclude_pressed"]
 
 [editable path="UI/Sidebar/ScrollContainer/Column/Margin/DebugPanel"]
