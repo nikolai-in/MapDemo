@@ -28,7 +28,8 @@ func enter(msg: Dictionary = {}) -> void:
 	get_node("../../UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Layers/Tree").update()
 	var sel: = get_node("../Selection")
 	for item in sel.selection:
-		item.self_modulate = Color( 1, 1, 1, 1 )
+		if is_instance_valid(item):
+			item.self_modulate = Color( 1, 1, 1, 1 )
 	sel.selection.clear()
 
 

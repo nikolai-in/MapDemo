@@ -38,6 +38,25 @@ func unhandled_input(event: InputEvent) -> void:
 					_state_machine.transition_to("Viewer")
 
 
+static func merge_polygons(polygons: Array, ignore_first: bool = true) -> PoolVector2Array:
+	if ignore_first:
+		polygons.pop_front()
+	var points: PoolVector2Array = PoolVector2Array([])
+	while !polygons.empty():
+		if points.empty():
+			points.append_array(polygons[0].polygon)
+			polygons.pop_front()
+			continue
+		points =  Geometry.merge_polygons_2d(points, polygons[0].polygon)[0]
+		polygons.pop_front()
+	return points
+
+static func calculate_intersection(polygons: Array) -> PoolVector2Array:
+	var main: PoolVector2Array = polygons[0].polygon
+	var sub: PoolVector2Array = merge_polygons(polygons)
+	return Geometry.intersect_polygons_2d(main,sub)[0]
+
+
 func _on_Unite_pressed() -> void:
 	pass # Replace with function body.
 
@@ -47,7 +66,16 @@ func _on_Subtract_pressed() -> void:
 
 
 func _on_Intersect_pressed() -> void:
-	pass # Replace with function body.
+	if not selection.empty():
+		var new_rect: = Polygon2D.new()
+		print_debug("SELECTION: ", selection)
+		print_debug("SELECTION 0: ", selection[0])
+		print_debug("SELECTION 0: ", selection[0].polygon)
+		calculate_intersection(selection)
+		#selection[0].polygon = calculate_intersection(selection)
+		#selection.pop_front()
+		for polygon in selection:
+			polygon.queue_free()
 
 
 func _on_Exclude_pressed() -> void:
