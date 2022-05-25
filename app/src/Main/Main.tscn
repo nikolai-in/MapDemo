@@ -327,5 +327,6 @@ script = ExtResource( 9 )
 [connection signal="toggled" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools/AddPoint" to="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools/AddRect" method="_on_tool_toggled"]
 [connection signal="toggled" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools/AddPoint" to="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools/AddLine" method="_on_tool_toggled"]
 [connection signal="toggled" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools/AddPoint" to="StateMachine/Viewer" method="_on_AddPoint_toggled"]
+[connection signal="item_selected" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Layers/Tree" to="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Layers/Tree" method="_on_Tree_item_selected"]
 
 [editable path="UI/Sidebar/ScrollContainer/Column/Margin/DebugPanel"]

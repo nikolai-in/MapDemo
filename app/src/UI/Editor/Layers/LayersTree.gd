@@ -19,4 +19,7 @@ func update() -> void:
 
 
 func _on_Tree_item_selected() -> void:
-	pass # Replace with function body.
+	var selected: = get_selected()
+	var origin = selected.get_metadata(0)
+	if origin is Polygon2D:
+		origin.color = Color.red
