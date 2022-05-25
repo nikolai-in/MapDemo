@@ -333,6 +333,7 @@ script = ExtResource( 9 )
 [connection signal="toggled" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools/AddPoint" to="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools/AddRect" method="_on_tool_toggled"]
 [connection signal="toggled" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools/AddPoint" to="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools/AddLine" method="_on_tool_toggled"]
 [connection signal="toggled" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools/AddPoint" to="StateMachine/Viewer" method="_on_AddPoint_toggled"]
+[connection signal="pressed" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools/Del" to="StateMachine/Selection" method="_on_Del_pressed"]
 [connection signal="multi_selected" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Layers/Tree" to="StateMachine/Selection" method="_on_Tree_multi_selected"]
 [connection signal="pressed" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Bools/Unite" to="StateMachine/Selection" method="_on_Unite_pressed"]
 [connection signal="pressed" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Bools/Subtract" to="StateMachine/Selection" method="_on_Subtract_pressed"]

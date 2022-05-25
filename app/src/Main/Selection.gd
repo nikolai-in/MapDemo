@@ -38,45 +38,50 @@ func unhandled_input(event: InputEvent) -> void:
 					_state_machine.transition_to("Viewer")
 
 
-static func merge_polygons(polygons: Array, ignore_first: bool = true) -> PoolVector2Array:
-	if ignore_first:
-		polygons.pop_front()
-	var points: PoolVector2Array = PoolVector2Array([])
-	while !polygons.empty():
-		if points.empty():
-			points.append_array(polygons[0].polygon)
-			polygons.pop_front()
-			continue
-		points =  Geometry.merge_polygons_2d(points, polygons[0].polygon)[0]
-		polygons.pop_front()
-	return points
-
-static func calculate_intersection(polygons: Array) -> PoolVector2Array:
-	var main: PoolVector2Array = polygons[0].polygon
-	var sub: PoolVector2Array = merge_polygons(polygons)
-	return Geometry.intersect_polygons_2d(main,sub)[0]
+static func merge_polygons(merger: Array):
+	var main: Polygon2D = merger[0]
+	merger.pop_front()
+	for sub in merger:
+		main.polygon = Geometry.merge_polygons_2d(main.polygon, sub.polygon).max()
+	return main.polygon
 
 
 func _on_Unite_pressed() -> void:
-	pass # Replace with function body.
+	if len(selection) > 1:
+		selection[0].polygon = merge_polygons(selection)
+		selection.pop_front()
+		for poly in selection:
+			poly.queue_free()
+		_state_machine.transition_to("Viewer")
+
 
 
 func _on_Subtract_pressed() -> void:
-	pass # Replace with function body.
+	if len(selection) > 1:
+		var main = selection[0]
+		selection.pop_front()
+		main.polygon = Geometry.clip_polygons_2d(main, merge_polygons(selection)) 
+		for poly in selection:
+			poly.queue_free()
+		_state_machine.transition_to("Viewer")
 
 
 func _on_Intersect_pressed() -> void:
-	if not selection.empty():
+	if len(selection) > 1:
 		var new_rect: = Polygon2D.new()
-		print_debug("SELECTION: ", selection)
-		print_debug("SELECTION 0: ", selection[0])
-		print_debug("SELECTION 0: ", selection[0].polygon)
-		calculate_intersection(selection)
-		#selection[0].polygon = calculate_intersection(selection)
-		#selection.pop_front()
 		for polygon in selection:
-			polygon.queue_free()
+			polygon.free()
+		_state_machine.transition_to("Viewer")
 
 
 func _on_Exclude_pressed() -> void:
 	pass # Replace with function body.
+
+
+func _on_Del_pressed() -> void:
+	var layers: = get_node("../../UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Layers/Tree")
+	if not selection.empty():
+		for polygon in selection:
+			polygon.free()
+			layers.update()
+			
