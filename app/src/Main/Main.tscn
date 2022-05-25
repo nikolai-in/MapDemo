@@ -213,6 +213,7 @@ margin_top = 27.0
 margin_right = 228.0
 margin_bottom = 227.0
 rect_min_size = Vector2( 0, 200 )
+select_mode = 2
 script = ExtResource( 23 )
 
 [node name="Sep3" type="HSeparator" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column"]
@@ -328,5 +329,6 @@ script = ExtResource( 9 )
 [connection signal="toggled" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools/AddPoint" to="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools/AddLine" method="_on_tool_toggled"]
 [connection signal="toggled" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools/AddPoint" to="StateMachine/Viewer" method="_on_AddPoint_toggled"]
 [connection signal="item_selected" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Layers/Tree" to="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Layers/Tree" method="_on_Tree_item_selected"]
+[connection signal="multi_selected" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Layers/Tree" to="StateMachine/Selection" method="_on_Tree_multi_selected"]
 
 [editable path="UI/Sidebar/ScrollContainer/Column/Margin/DebugPanel"]
