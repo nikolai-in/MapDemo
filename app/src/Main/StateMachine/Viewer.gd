@@ -26,6 +26,7 @@ func enter(msg: Dictionary = {}) -> void:
 	# А это тут нужно?
 	for btn in buttons:
 		btn.pressed = false
+	get_node("../../UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Layers/Tree").update()
 
 
 func exit() -> void:

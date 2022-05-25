@@ -47,6 +47,7 @@ func exit() -> void:
 # Make into PoolVector2Array of points
 func add_line(start: Vector2, end: Vector2, color: Color = Color.black) -> Polygon2D:
 	var line: = Polygon2D.new()
+	line.set_meta("type", "Line")
 	line.color = color
 	line.polygon = Geometry.offset_polyline_2d(PoolVector2Array([start, end]), 10)[0]
 	print_debug(line.polygon, Geometry.offset_polyline_2d(PoolVector2Array([start, end]), 20))

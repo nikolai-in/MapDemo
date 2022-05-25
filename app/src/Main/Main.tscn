@@ -22,7 +22,7 @@
 [ext_resource path="res://assets/icons/add_point.svg" type="Texture" id=20]
 [ext_resource path="res://src/UI/Editor/Tools/AddLine.gd" type="Script" id=21]
 [ext_resource path="res://src/UI/Editor/Tools/AddRect.gd" type="Script" id=22]
-[ext_resource path="res://src/UI/Editor/Layers/Layers.tscn" type="PackedScene" id=23]
+[ext_resource path="res://src/UI/Editor/Layers/LayersTree.gd" type="Script" id=23]
 [ext_resource path="res://src/UI/Search/SearchField/SearchField.tscn" type="PackedScene" id=24]
 [ext_resource path="res://src/UI/debug/DebugPanel.tscn" type="PackedScene" id=25]
 [ext_resource path="res://assets/icons/del.svg" type="Texture" id=26]
@@ -198,8 +198,22 @@ margin_top = 124.0
 margin_right = 228.0
 margin_bottom = 132.0
 
-[node name="Layers" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column" instance=ExtResource( 23 )]
+[node name="Layers" type="VBoxContainer" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column"]
+margin_top = 140.0
+margin_right = 228.0
 margin_bottom = 367.0
+
+[node name="Name" type="Label" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Layers"]
+margin_right = 228.0
+margin_bottom = 19.0
+text = "Слои:"
+
+[node name="Tree" type="Tree" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Layers"]
+margin_top = 27.0
+margin_right = 228.0
+margin_bottom = 227.0
+rect_min_size = Vector2( 0, 200 )
+script = ExtResource( 23 )
 
 [node name="Sep3" type="HSeparator" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column"]
 margin_top = 375.0

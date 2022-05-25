@@ -47,6 +47,7 @@ func exit() -> void:
 
 func add_rect(top_left: Vector2, bottom_right: Vector2, color: Color = Color.black) -> Polygon2D:
 	var rect: Polygon2D = Polygon2D.new()
+	rect.set_meta("type", "Rect")
 	rect.color = color
 	rect.polygon = PoolVector2Array([top_left, Vector2(top_left.x, bottom_right.y), bottom_right, Vector2(bottom_right.x, top_left.y)])
 	return rect
