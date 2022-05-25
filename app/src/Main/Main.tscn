@@ -213,6 +213,7 @@ margin_top = 27.0
 margin_right = 228.0
 margin_bottom = 227.0
 rect_min_size = Vector2( 0, 200 )
+hide_root = true
 select_mode = 2
 script = ExtResource( 23 )
 
