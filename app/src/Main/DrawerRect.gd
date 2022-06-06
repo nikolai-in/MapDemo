@@ -17,11 +17,9 @@ func unhandled_input(event: InputEvent) -> void:
 		if event.is_pressed():
 			if event.button_index == BUTTON_LEFT:
 				start_pos = MapCanvas.get_global_mouse_position()
-				print_debug("Start: ", start_pos)
 		if !event.is_pressed():
 			if event.button_index == BUTTON_LEFT:
 				end_pos = MapCanvas.get_global_mouse_position()
-				print_debug("End: ", end_pos)
 				MapCanvas.add_child(add_rect(start_pos, end_pos, color_picker.color))
 				_state_machine.transition_to("Viewer")
 	if event is InputEventMouseMotion:

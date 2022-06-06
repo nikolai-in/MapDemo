@@ -7,15 +7,20 @@ var selection = []
 
 func _on_Tree_multi_selected(item: TreeItem, column: int, selected: bool) -> void:
 	_state_machine.transition_to("Selection")
-	var origin = item.get_metadata(column)
-	if origin is Polygon2D:
-		if selected:
-			origin.self_modulate = Color( 2, 2, 2, 0.99 )
-			selection.append(origin)
-		else:
-			origin.self_modulate = Color( 1, 1, 1, 1 )
-			selection.remove(selection.find(origin))
-	print_debug(selection)
+	if is_instance_valid(item.get_metadata(column)):
+		var origin = item.get_metadata(column)
+		if is_instance_valid(origin) && origin is Polygon2D:
+			if selected:
+				print("\n1111111111\n", origin, selected, "\n1111111111\n")
+				origin.self_modulate = Color( 2, 2, 2, 0.99 )
+				selection.append(origin)
+			else:
+				print("\n000000000000\n", origin, selected, "\nn000000000000\n")
+				origin.self_modulate = Color( 1, 1, 1, 1 )
+				selection.remove(selection.find(origin))
+	else:
+		item.free()
+	print("\n:::::::::\n", selection, "\n:::::::::\n")
 
 
 func enter(msg: Dictionary = {}) -> void:
@@ -34,7 +39,6 @@ func unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.is_pressed():
 			if event.button_index == BUTTON_LEFT:
-					print_debug("VIEWER")
 					_state_machine.transition_to("Viewer")
 
 
@@ -49,9 +53,12 @@ static func merge_polygons(merger: Array):
 func _on_Unite_pressed() -> void:
 	if len(selection) > 1:
 		selection[0].polygon = merge_polygons(selection)
-		selection.pop_front()
+		# print("\n????????????????????\n",selection,"\n????????????????????\n")
+		selection.pop_at(0)
 		for poly in selection:
+			# print("\n!!!!!!!!!!!!!!!!!\n",poly,"\n!!!!!!!!!!!!!!!!!\n")
 			poly.queue_free()
+			selection.pop_at(selection.find(poly))
 		_state_machine.transition_to("Viewer")
 
 
@@ -84,4 +91,5 @@ func _on_Del_pressed() -> void:
 		for polygon in selection:
 			polygon.free()
 			layers.update()
-			
+			selection.pop_at(selection.find(polygon))
+	_state_machine.transition_to("Viewer")

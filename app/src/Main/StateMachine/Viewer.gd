@@ -23,14 +23,15 @@ func physics_process(delta: float) -> void:
 
 
 func enter(msg: Dictionary = {}) -> void:
+	var sel: = get_node("../Selection")	
 	for btn in buttons:
 		btn.pressed = false
-	get_node("../../UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Layers/Tree").update()
-	var sel: = get_node("../Selection")
-	for item in sel.selection:
+	for item in get_node("../../MapCanvas").get_children(): # sel.selection:
 		if is_instance_valid(item):
 			item.self_modulate = Color( 1, 1, 1, 1 )
 	sel.selection.clear()
+	get_node("../../UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Layers/Tree").update()
+	
 
 
 func exit() -> void:
