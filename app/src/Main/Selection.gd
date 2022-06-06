@@ -92,3 +92,21 @@ func _on_Del_pressed() -> void:
 			layers.update()
 			selection.pop_at(selection.find(polygon))
 	_state_machine.transition_to("Viewer")
+
+
+func _on_ColorPickerButton_color_changed(color: Color) -> void:
+	for item in selection:
+		if is_instance_valid(item) && item is Polygon2D:
+			item.color = color
+
+
+func _on_ColorPickerButton_popup_closed() -> void:
+	for item in selection:
+		if is_instance_valid(item) && item is Polygon2D:
+			item.self_modulate = Color( 2, 2, 2, 0.99 )
+
+
+func _on_ColorPickerButton_button_down() -> void:
+	for item in selection:
+		if is_instance_valid(item) && item is Polygon2D:
+			item.self_modulate = Color( 1, 1, 1, 1 )
