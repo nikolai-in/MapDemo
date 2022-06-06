@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://src/PanningCamera2D/PanningCamera2D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Grid/Grid.tscn" type="PackedScene" id=2]
@@ -26,6 +26,7 @@
 [ext_resource path="res://src/UI/Search/SearchField/SearchField.tscn" type="PackedScene" id=24]
 [ext_resource path="res://src/UI/debug/DebugPanel.tscn" type="PackedScene" id=25]
 [ext_resource path="res://assets/icons/del.svg" type="Texture" id=26]
+[ext_resource path="res://src/UI/Editor/Tools/RoomTypes.gd" type="Script" id=27]
 
 [sub_resource type="DynamicFont" id=1]
 use_mipmaps = true
@@ -63,7 +64,7 @@ scroll_horizontal_enabled = false
 
 [node name="Column" type="VBoxContainer" parent="UI/Sidebar/ScrollContainer"]
 margin_right = 260.0
-margin_bottom = 980.0
+margin_bottom = 1006.0
 
 [node name="Search" type="MarginContainer" parent="UI/Sidebar/ScrollContainer/Column"]
 margin_right = 260.0
@@ -120,26 +121,26 @@ expand_icon = true
 [node name="Editor" type="MarginContainer" parent="UI/Sidebar/ScrollContainer/Column"]
 margin_top = 243.0
 margin_right = 260.0
-margin_bottom = 787.0
+margin_bottom = 813.0
 rect_min_size = Vector2( 200, 0 )
 
 [node name="Panel" type="Panel" parent="UI/Sidebar/ScrollContainer/Column/Editor"]
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 252.0
-margin_bottom = 536.0
+margin_bottom = 562.0
 
 [node name="Margin" type="MarginContainer" parent="UI/Sidebar/ScrollContainer/Column/Editor"]
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 252.0
-margin_bottom = 536.0
+margin_bottom = 562.0
 
 [node name="Column" type="VBoxContainer" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin"]
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 236.0
-margin_bottom = 520.0
+margin_bottom = 546.0
 
 [node name="Name" type="Label" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column"]
 margin_right = 228.0
@@ -193,15 +194,22 @@ margin_bottom = 49.251
 size_flags_horizontal = 3
 icon = ExtResource( 26 )
 
-[node name="Sep2" type="HSeparator" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column"]
+[node name="RoomTypes" type="ItemList" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column"]
 margin_top = 124.0
 margin_right = 228.0
-margin_bottom = 132.0
+margin_bottom = 142.0
+auto_height = true
+script = ExtResource( 27 )
+
+[node name="Sep2" type="HSeparator" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column"]
+margin_top = 150.0
+margin_right = 228.0
+margin_bottom = 158.0
 
 [node name="Layers" type="VBoxContainer" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column"]
-margin_top = 140.0
+margin_top = 166.0
 margin_right = 228.0
-margin_bottom = 367.0
+margin_bottom = 393.0
 
 [node name="Name" type="Label" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Layers"]
 margin_right = 228.0
@@ -218,14 +226,14 @@ select_mode = 2
 script = ExtResource( 23 )
 
 [node name="Sep3" type="HSeparator" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column"]
-margin_top = 375.0
+margin_top = 401.0
 margin_right = 228.0
-margin_bottom = 383.0
+margin_bottom = 409.0
 
 [node name="Bools" type="HBoxContainer" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column"]
-margin_top = 391.0
+margin_top = 417.0
 margin_right = 228.0
-margin_bottom = 445.0
+margin_bottom = 471.0
 
 [node name="Unite" type="Button" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Bools"]
 margin_right = 51.3241
@@ -259,20 +267,20 @@ disabled = true
 icon = ExtResource( 16 )
 
 [node name="Sep4" type="HSeparator" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column"]
-margin_top = 453.0
+margin_top = 479.0
 margin_right = 228.0
-margin_bottom = 461.0
+margin_bottom = 487.0
 
 [node name="ColorPickerButton" type="ColorPickerButton" parent="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column"]
-margin_top = 469.0
+margin_top = 495.0
 margin_right = 228.0
-margin_bottom = 512.251
+margin_bottom = 538.251
 color = Color( 0.172549, 0.164706, 0.196078, 1 )
 
 [node name="Margin" type="MarginContainer" parent="UI/Sidebar/ScrollContainer/Column"]
-margin_top = 795.0
+margin_top = 821.0
 margin_right = 260.0
-margin_bottom = 956.64
+margin_bottom = 982.64
 
 [node name="DebugPanel" parent="UI/Sidebar/ScrollContainer/Column/Margin" instance=ExtResource( 25 )]
 margin_right = 252.0
@@ -297,9 +305,9 @@ margin_right = 198.0
 margin_bottom = 39.0
 
 [node name="StateOptions" type="MarginContainer" parent="UI/Sidebar/ScrollContainer/Column"]
-margin_top = 964.0
+margin_top = 990.0
 margin_right = 260.0
-margin_bottom = 980.0
+margin_bottom = 1006.0
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 6 )
@@ -334,6 +342,7 @@ script = ExtResource( 9 )
 [connection signal="toggled" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools/AddPoint" to="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools/AddLine" method="_on_tool_toggled"]
 [connection signal="toggled" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools/AddPoint" to="StateMachine/Viewer" method="_on_AddPoint_toggled"]
 [connection signal="pressed" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools/Del" to="StateMachine/Selection" method="_on_Del_pressed"]
+[connection signal="item_selected" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/RoomTypes" to="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/RoomTypes" method="_on_RoomTypes_item_selected"]
 [connection signal="multi_selected" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Layers/Tree" to="StateMachine/Selection" method="_on_Tree_multi_selected"]
 [connection signal="pressed" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Bools/Unite" to="StateMachine/Selection" method="_on_Unite_pressed"]
 [connection signal="pressed" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Bools/Subtract" to="StateMachine/Selection" method="_on_Subtract_pressed"]

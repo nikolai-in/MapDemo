@@ -11,15 +11,15 @@ func _on_Tree_multi_selected(item: TreeItem, column: int, selected: bool) -> voi
 		var origin = item.get_metadata(column)
 		if is_instance_valid(origin) && origin is Polygon2D:
 			if selected:
-				print("\n1111111111\n", origin, selected, "\n1111111111\n")
+				# print("\n1111111111\n", origin, selected, "\n1111111111\n")
 				origin.self_modulate = Color( 2, 2, 2, 0.99 )
 				selection.append(origin)
 			else:
-				print("\n000000000000\n", origin, selected, "\nn000000000000\n")
+				# print("\n000000000000\n", origin, selected, "\nn000000000000\n")
 				origin.self_modulate = Color( 1, 1, 1, 1 )
 				selection.remove(selection.find(origin))
 	else:
-		item.free()
+		_state_machine.transition_to("Viewer")
 	print("\n:::::::::\n", selection, "\n:::::::::\n")
 
 
@@ -39,12 +39,11 @@ func unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.is_pressed():
 			if event.button_index == BUTTON_LEFT:
-					_state_machine.transition_to("Viewer")
+				_state_machine.transition_to("Viewer")
 
 
 static func merge_polygons(merger: Array):
-	var main: Polygon2D = merger[0]
-	merger.pop_front()
+	var main: Polygon2D = merger.pop_front()
 	for sub in merger:
 		main.polygon = Geometry.merge_polygons_2d(main.polygon, sub.polygon).max()
 	return main.polygon
