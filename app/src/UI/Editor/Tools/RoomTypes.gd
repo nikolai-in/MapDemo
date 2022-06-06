@@ -17,6 +17,7 @@ func _ready() -> void:
 	add_item("Аудитория")
 	colors.append(Color("2c2a32"))
 	colors.append(Color("b2df2727"))
+	select(0)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

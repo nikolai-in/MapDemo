@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/Rects/Label.gd" type="Script" id=2]
+
+[node name="Polygon2D" type="Polygon2D"]
+
+[node name="Label" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 25.0
+text = "TEST"
+align = 1
+valign = 1
+script = ExtResource( 2 )
+
+[connection signal="renamed" from="." to="Label" method="_on_Polygon2D_renamed"]

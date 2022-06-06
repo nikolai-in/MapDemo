@@ -43,9 +43,18 @@ func exit() -> void:
 	end_pos = Vector2.ZERO
 
 
+onready var types: = get_node("../../../UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/RoomTypes")
+var room: = preload("res://src/Rects/Room.tscn")
+
 func add_rect(top_left: Vector2, bottom_right: Vector2, color: Color = Color.black) -> Polygon2D:
-	var rect: Polygon2D = Polygon2D.new()
-	rect.set_meta("type", "Rect")
+	if types.is_selected(0):
+		var rect: Polygon2D = Polygon2D.new()
+		rect.set_meta("type", "Hall")
+		rect.color = color
+		rect.polygon = PoolVector2Array([top_left, Vector2(top_left.x, bottom_right.y), bottom_right, Vector2(bottom_right.x, top_left.y)])
+		return rect
+	var rect: Polygon2D = room.instance()
+	rect.set_meta("type", "Room")
 	rect.color = color
 	rect.polygon = PoolVector2Array([top_left, Vector2(top_left.x, bottom_right.y), bottom_right, Vector2(bottom_right.x, top_left.y)])
 	return rect
