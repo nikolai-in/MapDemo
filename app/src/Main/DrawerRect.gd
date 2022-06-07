@@ -10,6 +10,7 @@ var start_pos: = Vector2.ZERO
 var end_pos: = Vector2.ZERO
 
 onready var color_picker: ColorPickerButton = get_node("../../../UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/ColorPickerButton")
+onready var nav: Navigation2D = get_node("../../../MapCanvas/Navigation2D")
 
 
 func unhandled_input(event: InputEvent) -> void:
@@ -20,7 +21,7 @@ func unhandled_input(event: InputEvent) -> void:
 		if !event.is_pressed():
 			if event.button_index == BUTTON_LEFT:
 				end_pos = MapCanvas.get_global_mouse_position()
-				MapCanvas.add_child(add_rect(start_pos, end_pos, color_picker.color))
+				add_rect(start_pos, end_pos, color_picker.color)
 				_state_machine.transition_to("Viewer")
 	if event is InputEventMouseMotion:
 		if event.button_mask == BUTTON_MASK_LEFT:
@@ -46,15 +47,21 @@ func exit() -> void:
 onready var types: = get_node("../../../UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/RoomTypes")
 var room: = preload("res://src/Rects/Room.tscn")
 
-func add_rect(top_left: Vector2, bottom_right: Vector2, color: Color = Color.black) -> Polygon2D:
+func add_rect(top_left: Vector2, bottom_right: Vector2, color: Color = Color.black):
 	if types.is_selected(0):
 		var rect: Polygon2D = Polygon2D.new()
 		rect.set_meta("type", "Hall")
 		rect.color = color
 		rect.polygon = PoolVector2Array([top_left, Vector2(top_left.x, bottom_right.y), bottom_right, Vector2(bottom_right.x, top_left.y)])
-		return rect
-	var rect: Polygon2D = room.instance()
-	rect.set_meta("type", "Room")
-	rect.color = color
-	rect.polygon = PoolVector2Array([top_left, Vector2(top_left.x, bottom_right.y), bottom_right, Vector2(bottom_right.x, top_left.y)])
-	return rect
+		nav.add_child(rect)
+		var polygon = NavigationPolygon.new()
+		var outline = PoolVector2Array([top_left, Vector2(top_left.x, bottom_right.y), bottom_right, Vector2(bottom_right.x, top_left.y)])
+		polygon.add_outline(outline)
+		polygon.make_polygons_from_outlines()
+		get_node("../../../MapCanvas/Navigation2D/NavigationPolygonInstance").navpoly = polygon
+	else:
+		var rect: Polygon2D = room.instance()
+		rect.set_meta("type", "Room")
+		rect.color = color
+		rect.polygon = PoolVector2Array([top_left, Vector2(top_left.x, bottom_right.y), bottom_right, Vector2(bottom_right.x, top_left.y)])
+		nav.add_child(rect)

@@ -20,7 +20,7 @@ func _on_Tree_multi_selected(item: TreeItem, column: int, selected: bool) -> voi
 				selection.remove(selection.find(origin))
 	else:
 		_state_machine.transition_to("Viewer")
-	print("\n:::::::::\n", selection, "\n:::::::::\n")
+	# print("\n:::::::::\n", selection, "\n:::::::::\n")
 
 
 func enter(msg: Dictionary = {}) -> void:

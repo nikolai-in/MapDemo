@@ -1,6 +1,6 @@
 extends Tree
 
-onready var MapCanvas : Node2D = owner.get_node("MapCanvas")
+onready var MapCanvas : Node2D = owner.get_node("MapCanvas/Navigation2D")
 
 var selected: TreeItem
 var origin_color: Color

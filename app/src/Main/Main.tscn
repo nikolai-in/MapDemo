@@ -333,6 +333,9 @@ script = ExtResource( 11 )
 [node name="Selection" type="Node" parent="StateMachine"]
 script = ExtResource( 9 )
 
+[connection signal="text_entered" from="UI/Sidebar/ScrollContainer/Column/Search/Margin/Column/From" to="StateMachine/Viewer" method="_on_From_text_entered"]
+[connection signal="text_entered" from="UI/Sidebar/ScrollContainer/Column/Search/Margin/Column/To" to="StateMachine/Viewer" method="_on_To_text_entered"]
+[connection signal="pressed" from="UI/Sidebar/ScrollContainer/Column/Search/Margin/Column/Button" to="StateMachine/Viewer" method="_on_Button_pressed"]
 [connection signal="toggled" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools/AddRect" to="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools/AddLine" method="_on_tool_toggled"]
 [connection signal="toggled" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools/AddRect" to="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools/AddPoint" method="_on_tool_toggled"]
 [connection signal="toggled" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Tools/AddRect" to="StateMachine/Viewer" method="_on_AddRect_toggled"]
@@ -354,4 +357,5 @@ script = ExtResource( 9 )
 [connection signal="color_changed" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/ColorPickerButton" to="StateMachine/Selection" method="_on_ColorPickerButton_color_changed"]
 [connection signal="popup_closed" from="UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/ColorPickerButton" to="StateMachine/Selection" method="_on_ColorPickerButton_popup_closed"]
 
+[editable path="MapCanvas"]
 [editable path="UI/Sidebar/ScrollContainer/Column/Margin/DebugPanel"]
