@@ -73,34 +73,31 @@ onready var line: = get_node("../../MapCanvas/Line2D")
 var from: = Vector2.ZERO
 var to: = Vector2.ZERO
 
-func _on_From_text_entered(new_text: String) -> void:
-	var found: = false
-	for room in nav.get_children():
-		if room.get_meta("type") == "Room":
-			if room.get_child(0).text == new_text:
-				from = room.get_child(0).get_position()
-				found = true
-				# print("\n*****\n", from, room, "\n*****\n")
-				break
-	if not found:
-		from_fld.clear()
-
-
-func _on_To_text_entered(new_text: String) -> void:
-	var found: = false
-	for room in nav.get_children():
-		if room.get_meta("type") == "Room":
-			if room.get_child(0).text == new_text:
-				to = room.get_child(0).get_position()
-				found = true
-				# print("\n*****\n", from, room, "\n*****\n")
-				break
-	if not found:
-		to_fld.clear()
-
 
 func _on_Button_pressed() -> void:
 	if from != Vector2.ZERO || to != Vector2.ZERO:
 		var path = nav.get_simple_path(from, to, true)
 		print("\n*****\n", path, "\n*****\n")
 		line.points = PoolVector2Array(path)
+
+
+func _on_From_text_changed(new_text: String) -> void:
+	var found: = false
+	for room in nav.get_children():
+		if room.get_meta("type") == "Room":
+			if room.get_child(0).text == new_text:
+				from = room.get_child(0).get_position()
+				found = true
+				print("\n*****\n", from, room, "\n*****\n")
+				break
+
+
+func _on_To_text_changed(new_text: String) -> void:
+	var found: = false
+	for room in nav.get_children():
+		if room.get_meta("type") == "Room":
+			if room.get_child(0).text == new_text:
+				to = room.get_child(0).get_position()
+				found = true
+				print("\n*****\n", from, room, "\n*****\n")
+				break
