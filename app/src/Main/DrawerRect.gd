@@ -77,3 +77,23 @@ func add_rect(top_left: Vector2, bottom_right: Vector2, color: Color = Color.bla
 		rect.color = color
 		rect.polygon = PoolVector2Array([top_left, Vector2(top_left.x, bottom_right.y), bottom_right, Vector2(bottom_right.x, top_left.y)])
 		nav.add_child(rect)
+
+func add_rect_poly(poly: PoolVector2Array, type: String, color: Color = Color.black):
+	if types.is_selected(0):
+		var rect: Polygon2D = Polygon2D.new()
+		rect.set_meta("type", type)
+		rect.color = color
+		rect.polygon = poly
+		nav.add_child(rect)
+		var npi : = get_node("../../../MapCanvas/Navigation2D/NavigationPolygonInstance")
+		var polygons = []
+		for polygon in nav.get_children():
+			if polygon.get_meta("type") == "Hall":
+				polygons.append(polygon.polygon)
+		npi.navpoly = create_nav_poly(polygons)
+	else:
+		var rect: Polygon2D = room.instance()
+		rect.set_meta("type", type)
+		rect.color = color
+		rect.polygon = poly
+		nav.add_child(rect)

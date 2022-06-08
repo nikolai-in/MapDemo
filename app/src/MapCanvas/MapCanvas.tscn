@@ -7,3 +7,4 @@
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation2D"]
 
 [node name="Line2D" type="Line2D" parent="."]
+default_color = Color( 0.827451, 0.2, 0.2, 0.815686 )

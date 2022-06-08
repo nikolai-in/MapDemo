@@ -43,7 +43,7 @@ func unhandled_input(event: InputEvent) -> void:
 
 
 static func merge_polygons(merger: Array):
-	var main: Polygon2D = merger.pop_front()
+	var main: Polygon2D = merger[-1]
 	for sub in merger:
 		main.polygon = Geometry.merge_polygons_2d(main.polygon, sub.polygon).max()
 	return main.polygon
@@ -51,30 +51,30 @@ static func merge_polygons(merger: Array):
 
 func _on_Unite_pressed() -> void:
 	if len(selection) > 1:
-		selection[0].polygon = merge_polygons(selection)
+		get_node("../Editor/DrawerRect").add_rect_poly(merge_polygons(selection), selection[0].get_meta("type"), selection[0].color)
 		# print("\n????????????????????\n",selection,"\n????????????????????\n")
-		selection.pop_at(0)
 		for poly in selection:
 			# print("\n!!!!!!!!!!!!!!!!!\n",poly,"\n!!!!!!!!!!!!!!!!!\n")
-			poly.queue_free()
-			selection.pop_at(selection.find(poly))
-		_state_machine.transition_to("Viewer")
+			poly.free()
+	_state_machine.transition_to("Viewer")
 
 
 
 func _on_Subtract_pressed() -> void:
-	if len(selection) > 1:
-		var main = selection[0]
-		selection.pop_front()
-		main.polygon = Geometry.clip_polygons_2d(main, merge_polygons(selection)) 
+	if len(selection) == 2:
+		var new_poly: = Geometry.clip_polygons_2d(selection[0].polygon, selection[1].polygon)
+		if new_poly.empty():
+			new_poly = Geometry.clip_polygons_2d(selection[1].polygon, selection[0].polygon)
+		if new_poly.empty():
+			return
+		get_node("../Editor/DrawerRect").add_rect_poly(new_poly[0], selection[0].get_meta("type"), selection[0].color)
 		for poly in selection:
-			poly.queue_free()
+			poly.free()
 		_state_machine.transition_to("Viewer")
 
 
 func _on_Intersect_pressed() -> void:
-	if len(selection) > 1:
-		var new_rect: = Polygon2D.new()
+	if len(selection) == 2:
 		for polygon in selection:
 			polygon.free()
 		_state_machine.transition_to("Viewer")
