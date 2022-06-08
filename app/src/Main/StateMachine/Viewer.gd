@@ -31,7 +31,12 @@ func enter(msg: Dictionary = {}) -> void:
 			item.self_modulate = Color( 1, 1, 1, 1 )
 	sel.selection.clear()
 	get_node("../../UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/Layers/Tree").update()
-	
+	var polygons = []
+	var npi : = get_node("../../MapCanvas/Navigation2D/NavigationPolygonInstance")
+	for polygon in nav.get_children():
+		if polygon.get_meta("type") == "Hall":
+			polygons.append(polygon.polygon)
+	npi.navpoly = get_node("../Editor/DrawerRect").create_nav_poly(polygons)
 
 
 func exit() -> void:

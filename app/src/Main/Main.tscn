@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://src/PanningCamera2D/PanningCamera2D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Grid/Grid.tscn" type="PackedScene" id=2]
@@ -33,6 +33,11 @@
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 4 )
+
+[sub_resource type="InputEventKey" id=2]
+
+[sub_resource type="ShortCut" id=3]
+shortcut = SubResource( 2 )
 
 [node name="Main" type="Node2D"]
 
@@ -166,6 +171,7 @@ margin_right = 51.3241
 margin_bottom = 49.251
 size_flags_horizontal = 3
 toggle_mode = true
+shortcut = SubResource( 3 )
 icon = ExtResource( 13 )
 script = ExtResource( 22 )
 

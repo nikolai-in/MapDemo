@@ -47,6 +47,17 @@ func exit() -> void:
 onready var types: = get_node("../../../UI/Sidebar/ScrollContainer/Column/Editor/Margin/Column/RoomTypes")
 var room: = preload("res://src/Rects/Room.tscn")
 
+var outlines = []
+
+
+func create_nav_poly(polygons: Array) -> NavigationPolygon:
+	var nav_polygon = NavigationPolygon.new()
+	for polygon in polygons:
+		nav_polygon.add_outline(polygon)
+	nav_polygon.make_polygons_from_outlines()
+	return nav_polygon
+
+
 func add_rect(top_left: Vector2, bottom_right: Vector2, color: Color = Color.black):
 	if types.is_selected(0):
 		var rect: Polygon2D = Polygon2D.new()
@@ -54,11 +65,12 @@ func add_rect(top_left: Vector2, bottom_right: Vector2, color: Color = Color.bla
 		rect.color = color
 		rect.polygon = PoolVector2Array([top_left, Vector2(top_left.x, bottom_right.y), bottom_right, Vector2(bottom_right.x, top_left.y)])
 		nav.add_child(rect)
-		var polygon = NavigationPolygon.new()
-		var outline = PoolVector2Array([top_left, Vector2(top_left.x, bottom_right.y), bottom_right, Vector2(bottom_right.x, top_left.y)])
-		polygon.add_outline(outline)
-		polygon.make_polygons_from_outlines()
-		get_node("../../../MapCanvas/Navigation2D/NavigationPolygonInstance").navpoly = polygon
+		var npi : = get_node("../../../MapCanvas/Navigation2D/NavigationPolygonInstance")
+		var polygons = []
+		for polygon in nav.get_children():
+			if polygon.get_meta("type") == "Hall":
+				polygons.append(polygon.polygon)
+		npi.navpoly = create_nav_poly(polygons)
 	else:
 		var rect: Polygon2D = room.instance()
 		rect.set_meta("type", "Room")
