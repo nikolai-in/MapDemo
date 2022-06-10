@@ -148,5 +148,5 @@ jobs:
           files: |
             linux.zip
             mac.zip
-            windows64.zip
-            windows32.zip
+            "windows 64.zip"
+            "windows 32.zip"
