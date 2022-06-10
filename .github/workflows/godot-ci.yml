@@ -23,16 +23,21 @@ jobs:
         run: |
           mkdir -v -p ~/.local/share/godot/templates
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
-      - name: Windows Build
+      - name: Windows Build 64
         run: |
-          mkdir -v -p build/windows
+          mkdir -v -p build/windows64
           cd $EXPORT_NAME
-          godot -v --export "Windows Desktop" ../build/windows/$EXPORT_NAME.exe
+          godot -v --export "Windows Desktop 64" ../build/windows64/$EXPORT_NAME.exe
+      - name: Windows Build 32
+        run: |
+          mkdir -v -p build/windows32
+          godot -v --export "Windows Desktop 32" ../build/windows32/$EXPORT_NAME.exe
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
           name: windows
-          path: build/windows
+          path: build/windows64
+
 
   export-linux:
     name: Linux Export 🐧
