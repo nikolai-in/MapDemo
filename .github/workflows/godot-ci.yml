@@ -127,7 +127,7 @@ jobs:
           path: build/mac
 
   release:
-    if: ${{ github.event_name == 'tag' }}
+    if: ${{ github.event_name == 'push' && contains(github.ref, 'refs/tags/') }}
     name: Release builds
     needs: [export-windows, export-linux, export-mac]
     runs-on: ubuntu-latest
