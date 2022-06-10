@@ -31,12 +31,18 @@ jobs:
       - name: Windows Build 32
         run: |
           mkdir -v -p build/windows32
+          cd $EXPORT_NAME
           godot -v --export "Windows Desktop 32" ../build/windows32/$EXPORT_NAME.exe
-      - name: Upload Artifact
+      - name: Upload Artifact 64
         uses: actions/upload-artifact@v1
         with:
-          name: windows
+          name: windows 64
           path: build/windows64
+      - name: Upload Artifact 32
+        uses: actions/upload-artifact@v1
+        with:
+          name: windows 32
+          path: build/windows32
 
 
   export-linux:
@@ -132,7 +138,7 @@ jobs:
 
       - name: Compress
         shell: bash
-        run: for build in {mac,linux,windows}; do zip -r $build $build; done
+        run: for build in {mac,linux,"windows 64","windows 32"}; do zip -r $build $build; done
 
       - name: upload
         uses: marvinpinto/action-automatic-releases@latest
@@ -142,4 +148,5 @@ jobs:
           files: |
             linux.zip
             mac.zip
-            windows.zip
+            windows64.zip
+            windows32.zip
